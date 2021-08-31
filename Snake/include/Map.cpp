@@ -15,3 +15,13 @@ int Map::getSizeY()
 {
 	return this->mapSizeY;
 }
+
+void Map::setSizeX(int X)
+{
+	this->mapSizeX = X;
+};
+
+void Map::setSizeY(int Y)
+{
+	this->mapSizeY = Y;
+};

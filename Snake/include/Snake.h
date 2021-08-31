@@ -31,6 +31,8 @@ public:
 
 	bool isRunning();
 
+	void setRun(bool alive);
+
 private:
 	int tailL;
 

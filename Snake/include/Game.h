@@ -26,6 +26,8 @@ public:
 
 	bool DrawTail(int j, int i);
 
+	void Rescale(int x, int y);
+
 private:
 	int mapX, mapY;
 

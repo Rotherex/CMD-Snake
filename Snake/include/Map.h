@@ -10,6 +10,9 @@ public:
 	int getSizeX();
 	int getSizeY();
 
+	void setSizeX(int X);
+	void setSizeY(int Y);
+
 private:
 	int mapSizeX, mapSizeY;
 };

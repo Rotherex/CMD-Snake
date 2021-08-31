@@ -73,3 +73,8 @@ int Snake::getTailLength()
 {
 	return this->tailL;
 }
+
+void Snake::setRun(bool alive)
+{
+	this->isAlive = alive;
+};

@@ -82,7 +82,7 @@ void Game::DrawBoard()
 		std::cout << "#";
 	};
 
-	std::cout << std::endl << "Score: " << this->score << std::endl;
+	std::cout << '\n' << "Score: " << this->score << '\n';
 }
 
 bool Game::DrawSnake(int j, int i)
@@ -182,6 +182,10 @@ void Game::Logic()
 
 	if (state.snake.getPosX() >= this->mapX) state.snake.setPosX(0); else if (state.snake.getPosX() < 0) state.snake.setPosX(this->mapX - 1);
 	if (state.snake.getPosY() >= this->mapY) state.snake.setPosY(0); else if (state.snake.getPosY() < 0) state.snake.setPosY(this->mapY - 1);
+
+	for (int i = 0; i < state.snake.getTailLength(); i++)
+		if (tailX[i] == state.snake.getPosX() && tailY[i] == state.snake.getPosY())
+			state.snake.setRun(false);
 }
 
 void Game::Input()
@@ -203,6 +207,7 @@ void Game::Input()
 			state.snake.setSnakeDir(Direction::DOWN);
 			break;
 		case 'x':
+			this->Rescale(15, 15);
 			break;
 		}
 	}
@@ -228,6 +233,27 @@ void Game::run()
 		Game::Input();
 		Game::Logic();
 		Game::DrawBoard();
-		Sleep(50);
+
+		Sleep(100);
+	}
+}
+
+void Game::Rescale(int x, int y)
+{
+	this->mapX = x;
+	this->mapY = y;
+
+	state.map.setSizeX(x);
+	state.map.setSizeY(y);
+
+	int i = 0;
+
+	for (Fruit fruit : state.fruit)
+	{
+		if (fruit.getPosX() >= x || fruit.getPosY() >= y) {
+			this->RemoveFruit(fruit, i);
+		}
+
+		i++;
 	}
 }
