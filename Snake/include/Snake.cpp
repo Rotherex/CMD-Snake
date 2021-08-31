@@ -1,6 +1,8 @@
 #include "Snake.h"
 
-Snake::Snake(int gameSizeX, int gameSizeY)
+Snake::Snake(int gameSizeX, int gameSizeY) :
+	tailL(0),
+	dir(Direction::STOP)
 {
 	this->snakePosX = gameSizeX / 2;
 	this->snakePosY = gameSizeY / 2;
@@ -61,3 +63,13 @@ void Snake::setPosY(int posY)
 {
 	this->snakePosY = posY;
 };
+
+void Snake::increaseTailLength(int incrStep)
+{
+	this->tailL += incrStep;
+};
+
+int Snake::getTailLength()
+{
+	return this->tailL;
+}

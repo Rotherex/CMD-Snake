@@ -6,7 +6,7 @@
 class Game
 {
 public:
-	Game(int gameSizeX, int gameSizeY);
+	Game();
 
 	void DrawBoard();
 
@@ -14,13 +14,17 @@ public:
 
 	void run();
 
-	void AddFruit(int j, int i);
+	void AddFruit();
+
+	bool DrawFruit(int j, int i);
 
 	void Logic();
 
-	void RemoveFruit();
+	void RemoveFruit(Fruit& fruit, int arrayIndex);
 
 	void Input();
+
+	bool DrawTail(int j, int i);
 
 private:
 	int mapX, mapY;
@@ -28,5 +32,12 @@ private:
 	GameState state;
 
 	Direction snakeDir;
+
+	int tailX[100], tailY[100];
+
+	int fruitMaxCount = 5;
+	int fruitCurrentCount = 0;
+
+	int score = 0;
 };
 

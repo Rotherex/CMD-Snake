@@ -17,6 +17,8 @@ public:
 	int getPosX();
 	int getPosY();
 
+	int getTailLength();
+
 	void setPosX(int posX);
 	void setPosY(int posY);
 
@@ -25,9 +27,12 @@ public:
 	void decreasePosX();
 	void decreasePosY();
 
+	void increaseTailLength(int incStep);
+
 	bool isRunning();
 
 private:
+	int tailL;
 
 	int snakePosX, snakePosY;
 
