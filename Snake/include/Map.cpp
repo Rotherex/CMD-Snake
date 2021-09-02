@@ -25,3 +25,13 @@ void Map::setSizeY(int Y)
 {
 	this->mapSizeY = Y;
 };
+
+int Map::getScore()
+{
+	return this->score;
+}
+
+void Map::increaseScore(int scoreStep)
+{
+	this->score += scoreStep;
+}

@@ -1,11 +1,11 @@
 #include "Snake.h"
 
-Snake::Snake(int gameSizeX, int gameSizeY) :
+Snake::Snake(int x, int y) :
 	tailL(0),
 	dir(Direction::STOP)
 {
-	this->snakePosX = gameSizeX / 2;
-	this->snakePosY = gameSizeY / 2;
+	this->m_Pos.x = x / 2;
+	this->m_Pos.y = y / 2;
 
 }
 
@@ -19,14 +19,9 @@ void Snake::setSnakeDir(Direction userDir)
 	this->dir = userDir;
 }
 
-int Snake::getPosX()
+Position Snake::getPosition()
 {
-	return this->snakePosX;
-}
-
-int Snake::getPosY()
-{
-	return this->snakePosY;
+	return this->m_Pos;
 }
 
 bool Snake::isRunning()
@@ -36,32 +31,27 @@ bool Snake::isRunning()
 
 void Snake::incrementPosX()
 {
-	this->snakePosX += 1;
+	this->m_Pos.x += 1;
 };
 
 void Snake::incrementPosY()
 {
-	this->snakePosY += 1;
+	this->m_Pos.y += 1;
 };
 
 void Snake::decreasePosX()
 {
-	this->snakePosX -= 1;
+	this->m_Pos.x -= 1;
 };
 
 void Snake::decreasePosY()
 {
-	this->snakePosY -= 1;
+	this->m_Pos.y -= 1;
 };
 
-void Snake::setPosX(int posX)
+void Snake::setPosition(Position pos)
 {
-	this->snakePosX = posX;
-};
-
-void Snake::setPosY(int posY)
-{
-	this->snakePosY = posY;
+	this->m_Pos = pos;
 };
 
 void Snake::increaseTailLength(int incrStep)

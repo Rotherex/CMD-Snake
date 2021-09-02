@@ -1,6 +1,7 @@
 #pragma once
 #include "util.h"
 #include <conio.h>
+#include "GameState.h"
 
 class Snake
 {
@@ -8,19 +9,17 @@ private:
 	Direction dir;
 
 public:
-	Snake(int gameSizeX, int gameSizeY);
+	Snake(int x, int y);
 
 	Direction getSnakeDir();
 
 	void setSnakeDir(Direction userDir);
 
-	int getPosX();
-	int getPosY();
+	Position getPosition();
 
 	int getTailLength();
 
-	void setPosX(int posX);
-	void setPosY(int posY);
+	void setPosition(Position pos);
 
 	void incrementPosX();
 	void incrementPosY();
@@ -36,7 +35,7 @@ public:
 private:
 	int tailL;
 
-	int snakePosX, snakePosY;
+	Position m_Pos;
 
 	bool isAlive = true;
 };

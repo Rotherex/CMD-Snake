@@ -145,6 +145,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="include\Snake.cpp" />
     <ClCompile Include="include\Map.cpp" />
+    <ClCompile Include="include\SpecialFruit.cpp" />
+    <ClCompile Include="include\NormalFruit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Fruit.h" />
@@ -153,6 +155,8 @@
     <ClInclude Include="include\Snake.h" />
     <ClInclude Include="include\Map.h" />
     <ClInclude Include="include\util.h" />
+    <ClInclude Include="include\SpecialFruit.h" />
+    <ClInclude Include="include\NormalFruit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

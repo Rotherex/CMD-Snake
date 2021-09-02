@@ -10,10 +10,15 @@ public:
 	int getSizeX();
 	int getSizeY();
 
+	int getScore();
+	void increaseScore(int scoreStep);
+
 	void setSizeX(int X);
 	void setSizeY(int Y);
 
 private:
 	int mapSizeX, mapSizeY;
+
+	int score;
 };
 

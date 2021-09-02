@@ -1,36 +1,17 @@
 #include "Fruit.h"
 
-Fruit::Fruit(int posX, int posY, int pointIncrement, int tailSteep):
-	m_posX(posX),
-	m_posY(posY),
-	pointsIncrement(pointIncrement),
-	tailStep(tailSteep)
+Fruit::Fruit(Position pos) :
+	m_Pos(pos)
 {
 
 }
 
-int Fruit::getPosX() {
-	return this->m_posX;
-};
-
-int Fruit::getPosY() {
-	return this->m_posY;
-};
-
-void Fruit::setPosX(int posX) {
-	this->m_posX = posX;
-};
-
-void Fruit::setPosY(int posY) {
-	this->m_posY = posY;
-};
-
-int Fruit::getPointIncr()
+void Fruit::setPosition(Position newPos)
 {
-	return this->pointsIncrement;
+	this->m_Pos = newPos;
 }
 
-int Fruit::getTailStep()
+Position Fruit::getPosition()
 {
-	return this->tailStep;
+	return this->m_Pos;
 }

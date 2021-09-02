@@ -89,7 +89,7 @@ bool Game::DrawSnake(int j, int i)
 {
 	Snake snake = state.snake;
 
-	if (j == snake.getPosY() && i == snake.getPosX())
+	if (j == snake.getPosition().y && i == snake.getPosition().x)
 	{
 		return true;
 	}
@@ -99,9 +99,9 @@ bool Game::DrawSnake(int j, int i)
 
 bool Game::DrawFruit(int j, int i)
 {
-	for (Fruit fruit : state.fruit)
+	for (Fruit* fruit : state.fruit)
 	{
-		if (j == fruit.getPosY() && i == fruit.getPosX())
+		if (j == fruit->getPosition().y && i == fruit->getPosition().x)
 		{
 			return true;
 		}
@@ -110,15 +110,14 @@ bool Game::DrawFruit(int j, int i)
 	return false;
 }
 
-void Game::AddFruit()
+Fruit* Game::CreateRandomFruitWithRandomPosition()
 {
 	int posX = rand() % this->mapX + 1;
 	int posY = rand() % this->mapY + 1;
 
-	int increment = rand() % 5 + 1;
-
-	state.fruit.push_back(Fruit(posX, posY, increment, 1));
 	this->fruitCurrentCount++;
+
+	return dynamic_cast<Fruit*>(new NormalFruit(Position(posX, posY)));
 }
 
 void Game::Logic()
@@ -127,8 +126,8 @@ void Game::Logic()
 	int prevX = this->tailX[0];
 	int prevY = this->tailY[0];
 	int prev2X = 0, prev2Y = 0;
-	this->tailX[0] = this->state.snake.getPosX();
-	this->tailY[0] = this->state.snake.getPosY();
+	this->tailX[0] = this->state.snake.getPosition().x;
+	this->tailY[0] = this->state.snake.getPosition().y;
 
 	for (int i = 1; i < this->state.snake.getTailLength(); i++)
 	{
@@ -164,27 +163,24 @@ void Game::Logic()
 
 		if (currentFruits < this->fruitMaxCount)
 		{
-			this->AddFruit();
 		}
 	}
 
 	int i = 0;
 
-	for (Fruit fruit : state.fruit)
+	for (Fruit* fruit : state.fruit)
 	{
-		if (fruit.getPosX() == state.snake.getPosX() && fruit.getPosY() == state.snake.getPosY())
+		if (fruit->getPosition().x == state.snake.getPosition().x && fruit->getPosition().y == state.snake.getPosition().y)
 		{
-			RemoveFruit(fruit, i);
+			fruit->fruitAction(state);
 		}
-
-		i++;
 	}
 
-	if (state.snake.getPosX() >= this->mapX) state.snake.setPosX(0); else if (state.snake.getPosX() < 0) state.snake.setPosX(this->mapX - 1);
-	if (state.snake.getPosY() >= this->mapY) state.snake.setPosY(0); else if (state.snake.getPosY() < 0) state.snake.setPosY(this->mapY - 1);
+	if (state.snake.getPosition().x >= this->mapX) state.snake.setPosition({ 0 , state.snake.getPosition().y }); else if (state.snake.getPosition().x < 0) state.snake.setPosition({ this->mapX - 1 , state.snake.getPosition().y});
+	if (state.snake.getPosition().y >= this->mapY) state.snake.setPosition({ state.snake.getPosition().x , 0 }); else if (state.snake.getPosition().y < 0) state.snake.setPosition({ state.snake.getPosition().x , this->mapY -  1 });
 
 	for (int i = 0; i < state.snake.getTailLength(); i++)
-		if (tailX[i] == state.snake.getPosX() && tailY[i] == state.snake.getPosY())
+		if (tailX[i] == state.snake.getPosition().x && tailY[i] == state.snake.getPosition().y)
 			state.snake.setRun(false);
 }
 
@@ -215,11 +211,9 @@ void Game::Input()
 
 void Game::RemoveFruit(Fruit& fruit, int arrayIndex)
 {
-	state.fruit.erase(state.fruit.begin() + arrayIndex);
+	delete state.fruit[arrayIndex];
 
-	this->score += fruit.getPointIncr();
-
-	state.snake.increaseTailLength(fruit.getTailStep());
+	state.fruit[arrayIndex] = nullptr;
 
 	this->fruitCurrentCount--;
 }
@@ -248,12 +242,13 @@ void Game::Rescale(int x, int y)
 
 	int i = 0;
 
-	for (Fruit fruit : state.fruit)
+	for (Fruit* fruit : state.fruit)
 	{
-		if (fruit.getPosX() >= x || fruit.getPosY() >= y) {
-			this->RemoveFruit(fruit, i);
+		if (fruit->getPosition().x >= x || fruit->getPosition().y >= y) {
+			this->RemoveFruit(*fruit, i);
 		}
 
 		i++;
 	}
 }
+

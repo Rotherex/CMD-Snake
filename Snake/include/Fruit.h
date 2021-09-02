@@ -1,23 +1,19 @@
 #pragma once
+#include "GameState.h"
+
 class Fruit
 {
 public:
-	Fruit(int posX, int posY, int pointsIncrement, int tailStep);
+	Fruit(Position pos);
 
-	void setPosX(int posX);
-	void setPosY(int posY);
+	void setPosition(Position newPos);
 
-	int getPosX();
-	int getPosY();
+	Position getPosition();
 
-	int getPointIncr();
-	int getTailStep();
+	virtual void fruitAction(GameState& state) = 0;
 
-private:
-	int m_posX, m_posY;
-
-	int pointsIncrement;
-
-	int tailStep;
+protected:
+	
+	Position m_Pos;
 };
 

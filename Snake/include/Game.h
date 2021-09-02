@@ -1,6 +1,8 @@
 #pragma once
 #include "GameState.h"
 #include <conio.h>
+#include "NormalFruit.h"
+#include "SpecialFruit.h"
 #include <Windows.h>
 
 class Game
@@ -14,7 +16,7 @@ public:
 
 	void run();
 
-	void AddFruit();
+	Fruit* CreateRandomFruitWithRandomPosition();
 
 	bool DrawFruit(int j, int i);
 
@@ -37,7 +39,7 @@ private:
 
 	int tailX[100], tailY[100];
 
-	int fruitMaxCount = 5;
+	int fruitMaxCount = 100;
 	int fruitCurrentCount = 0;
 
 	int score = 0;
